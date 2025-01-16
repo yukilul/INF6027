@@ -2,7 +2,7 @@ install.packages("TTR")
 install.packages("pROC")
 install.packages("caret")
 install.packages("tsModel")
-library(TTR)
+library(TTR)# load necessary libraries
 library(pROC)
 library(caret)
 library(tsModel)
@@ -16,12 +16,12 @@ kable( tail(aapl,1),caption = 'End Date')
 aapl[mapply(is.infinite, aapl)] <- NA
 aapl <- na.omit(aapl)
 aapl$Date <- sapply(aapl$Date, function(x) {
-  parts <- unlist(strsplit(x, "-")) # 拆分字符串
-  paste(parts[3], parts[2], parts[1], sep = "-") # 调整顺序为 年-月-日
+  parts <- unlist(strsplit(x, "-")) # Split string
+  paste(parts[3], parts[2], parts[1], sep = "-") # Adjust the sequence to year - month - day
 })
-# 转换为日期格式
+# Convert to date format
 aapl$Date <- as.Date(aapl$Date, format = "%Y-%m-%d")
-# 筛选10年
+# filter 10 years
 aapl <- subset(aapl, Date >= as.Date("2012-01-01") & Date <= as.Date("2022-12-12"))
 
 plot(aapl$Date, aapl$Close, type = "l", col = "blue", 
